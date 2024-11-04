@@ -45,7 +45,7 @@ function startComparison() {
     compareButton.style.display = 'none';
 
     const loadingImage = document.createElement('img');
-    loadingImage.src = 'images/loading.png';
+    loadingImage.src = 'loading.png';
     loadingImage.alt = 'Loading';
     loadingImage.className = 'loading-image';
     resultDisplay.appendChild(loadingImage);
