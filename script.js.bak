@@ -171,6 +171,7 @@ document.getElementById('add-item-button').onclick = function() {
         <td><input type="text" placeholder="اسم البند"></td>
         <td><input type="text" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
         <td><input type="text" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
+        <td class="handle">⇅</td>
         <td><button class="delete-button">X</button></td>
     `;
     tbody.appendChild(newRow);
@@ -195,74 +196,77 @@ document.getElementById('upload-button').onclick = function() {
 
     if (file) {
         const reader = new FileReader();
-reader.onload = function(event) {
-    const content = event.target.result;
-    const rows = content.split('\n'); // تقسيم البيانات إلى صفوف
+        reader.onload = function(event) {
+            const content = event.target.result;
+            const rows = content.split('\n'); // تقسيم البيانات إلى صفوف
 
-    // إفراغ الجدول قبل إضافة بيانات جديدة
-    const tbody = document.querySelector('tbody');
-    tbody.innerHTML = '';
+            // إفراغ الجدول قبل إضافة بيانات جديدة
+            const tbody = document.querySelector('tbody');
+            tbody.innerHTML = '';
 
-    rows.forEach(row => {
-        const columns = row.split(','); // تقسيم الصف إلى أعمدة
-        if (columns.length === 3) { // التأكد من وجود 3 أعمدة
-            const newRow = document.createElement('tr');
-            newRow.setAttribute('draggable', 'true'); // تعيين draggable لكل صف جديد
-            newRow.innerHTML = `
-                <td><input type="text" value="${columns[0].trim()}" placeholder="اسم البند"></td>
-                <td><input type="text" value="${columns[1].trim()}" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
-                <td><input type="text" value="${columns[2].trim()}" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
-                <td class="handle">⇅</td>
-                <td><button class="delete-button">X</button></td>
-            `;
-            tbody.appendChild(newRow);
+            rows.forEach(row => {
+                const columns = row.split(','); // تقسيم الصف إلى أعمدة
+                if (columns.length === 3) { // التأكد من وجود 3 أعمدة
+                    const newRow = document.createElement('tr');
+                    newRow.setAttribute('draggable', 'true'); // تعيين draggable لكل صف جديد
+                    newRow.innerHTML = `
+                        <td><input type="text" value="${columns[0].trim()}" placeholder="اسم البند"></td>
+                        <td><input type="text" value="${columns[1].trim()}" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
+                        <td><input type="text" value="${columns[2].trim()}" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
+                        <td class="handle">⇅</td> <!-- تأكد من وجود عنصر التحريك هنا -->
+                        <td><button class="delete-button">X</button></td>
+                    `;
+                    tbody.appendChild(newRow);
 
-            // إضافة حدث لحذف الصف الجديد
-            newRow.querySelector('.delete-button').onclick = function() {
-                newRow.remove();
-            };
+                    // إضافة حدث لحذف الصف الجديد
+                    newRow.querySelector('.delete-button').onclick = function() {
+                        newRow.remove();
+                    };
 
-            // تفعيل السحب والإفلات للصف الجديد
-            newRow.addEventListener('dragstart', () => {
-                draggedRow = newRow;
-                newRow.classList.add('dragging');
-            });
+                    // تفعيل السحب والإفلات للصف الجديد
+                    newRow.addEventListener('dragstart', () => {
+                        draggedRow = newRow;
+                        newRow.classList.add('dragging');
+                    });
 
-            newRow.addEventListener('dragend', () => {
-                draggedRow = null;
-                newRow.classList.remove('dragging');
-            });
+                    newRow.addEventListener('dragend', () => {
+                        draggedRow = null;
+                        newRow.classList.remove('dragging');
+                    });
 
-            newRow.addEventListener('dragover', (e) => {
-                e.preventDefault();
-                if (newRow !== draggedRow) {
-                    const bounding = newRow.getBoundingClientRect();
-                    const offset = bounding.y + bounding.height / 2;
-                    if (e.clientY - offset > 0) {
-                        newRow.style.borderBottom = '2px solid #000';
+                    newRow.addEventListener('dragover', (e) => {
+                        e.preventDefault();
+                        if (newRow !== draggedRow) {
+                            const bounding = newRow.getBoundingClientRect();
+                            const offset = bounding.y + bounding.height / 2;
+                            if (e.clientY - offset > 0) {
+                                newRow.style.borderBottom = '2px solid #000';
+                                newRow.style.borderTop = '';
+                            } else {
+                                newRow.style.borderTop = '2px solid #000';
+                                newRow.style.borderBottom = '';
+                            }
+                        }
+                    });
+
+                    newRow.addEventListener('dragleave', () => {
                         newRow.style.borderTop = '';
-                    } else {
-                        newRow.style.borderTop = '2px solid #000';
                         newRow.style.borderBottom = '';
-                    }
+                    });
+
+                    newRow.addEventListener('drop', () => {
+                        if (newRow !== draggedRow) {
+                            newRow.style.borderTop = '';
+                            newRow.style.borderBottom = '';
+                            if (draggedRow) {
+                                const tbody = newRow.parentNode;
+                                tbody.insertBefore(draggedRow, newRow.nextSibling);
+                            }
+                        }
+                    });
                 }
             });
-
-            newRow.addEventListener('dragleave', () => {
-                newRow.style.borderTop = '';
-                newRow.style.borderBottom = '';
-            });
-
-            newRow.addEventListener('drop', () => {
-                if (newRow !== draggedRow) {
-                    newRow.style.borderTop = '';
-                    newRow.style.borderBottom = '';
-                    if (draggedRow) {
-                        const tbody = newRow.parentNode;
-                        tbody.insertBefore(draggedRow, newRow.nextSibling);
-                    }
-                }
-            });
-        }
-    });
+        };
+        reader.readAsText(file);
+    }
 };
