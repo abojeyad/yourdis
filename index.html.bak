@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>تطبيق مقارنة اللاعبين</title>
+    <meta name="description" content="تطبيق يسمح بمقارنة أداء اللاعبين من خلال إدخال بياناتهم وتحليل النتائج.">
+</head>
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h2>إدخال البيانات</h2>
+            <!-- إضافة خاصية رفع ملف CSV -->
+            <h3>رفع ملف CSV</h3>
+            <input type="file" id="csv-file" accept=".csv">
+            <button id="upload-button">رفع ملف CSV</button>
+			
+            <table>
+                <thead>
+                    <tr>
+                        <th>البند</th>
+                        <th>اللاعب الأول</th>
+                        <th>اللاعب الثاني</th>
+                        <th>تحريك</th>
+                        <th>حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text" placeholder="اسم البند" value="عدد المباريات"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="86%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="77%"></td>
+                        <td><button class="delete-button">X</button></td> <!-- زر الحذف للصف الأول -->
+						<td class="handle">⇅</td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأهداف"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="80"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="95"></td>
+                        <td><button class="delete-button">X</button></td> <!-- زر الحذف للصف الثاني -->
+						<td class="handle">⇅</td>
+                    </tr> 
+					<tr>
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأسيست"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="65%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="83%"></td>
+                        <td><button class="delete-button">X</button></td> <!-- زر الحذف للصف الثالث -->
+						<td class="handle">⇅</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="add-item-button">إضافة بند جديد</button>
+            <div class="image-inputs">
+                <h3>إضافة صور اللاعبين</h3>
+                <input type="text" id="player1-name" placeholder="اسم اللاعب الأول" value="محمد صلاح">
+                <input type="file" id="player1-image" accept="image/*" aria-label="تحميل صورة اللاعب الأول">
+                <input type="text" id="player2-name" placeholder="اسم اللاعب الثاني" value="ميسي">
+                <input type="file" id="player2-image" accept="image/*" aria-label="تحميل صورة اللاعب الثاني">
+            </div>
+            <!-- حقل إدخال الصورة الخلفية -->
+            <div class="background-input">
+                <h3>إضافة صورة كخلفية</h3>
+                <input type="file" id="background-image" accept="image/*" aria-label="تحميل صورة الخلفية">
+            </div>
+            <button id="prepare-button">تحضير النتائج</button>
+        </div>
+
+        <div class="output-section">
+            <h2>مقارنة بواسطة الذكاء الإصطناعي</h2>
+            <div id="result-display">
+                <!-- هنا سيتم عرض نتائج المقارنة -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+	 // تفعيل السحب والإفلات على الصفوف
+
+        // إضافة صف جديد عند الضغط على زر إضافة
+        document.getElementById('add-item-button').onclick = function() {
+            const tbody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="اسم البند"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
+                <td class="handle">⇅</td>
+                <td><button class="delete-button">X</button></td>
+            `;
+
+            // حدث الحذف للصف الجديد
+            newRow.querySelector('.delete-button').onclick = function() {
+                newRow.remove();
+            };
+            tbody.appendChild(newRow);
+        };
+
+        // تفعيل الحذف للصفوف الحالية
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.onclick = function() {
+                button.closest('tr').remove();
+            };
+        });
+    </script>
+
+        document.getElementById('add-item-button').onclick = function() {
+            const tbody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="اسم البند"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
+                <td><button class="delete-button">X</button></td> <!-- زر الحذف الجديد -->
+            `;
+
+            // إضافة الحدث لزر الحذف
+            const deleteButton = newRow.querySelector('.delete-button');
+            deleteButton.onclick = function() {
+                newRow.remove(); // إزالة الصف عند النقر على زر الحذف
+            };
+            
+            tbody.appendChild(newRow); // إضافة الصف الجديد إلى tbody
+        };
+
+        // إضافة الأحداث لزر الحذف الموجود مسبقًا
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.onclick = function() {
+                const row = button.closest('tr');
+                row.remove(); // إزالة الصف عند النقر على زر الحذف
+            };
+        });
+    </script>
+</body>
+</html>

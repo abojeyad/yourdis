@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>تطبيق مقارنة اللاعبين</title>
+    <meta name="description" content="تطبيق يسمح بمقارنة أداء اللاعبين من خلال إدخال بياناتهم وتحليل النتائج.">
+</head>
+<body>
+    <div class="container">
+        <div class="input-section">
+            <h2>إدخال البيانات</h2>
+            <h3>رفع ملف CSV</h3>
+            <input type="file" id="csv-file" accept=".csv">
+            <button id="upload-button">رفع ملف CSV</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>البند</th>
+                        <th>اللاعب الأول</th>
+                        <th>اللاعب الثاني</th>
+                        <th>تحريك</th>
+                        <th>حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد المباريات"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="86%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="77%"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأهداف"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="80"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="95"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأسيست"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="65%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="83%"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="add-item-button">إضافة بند جديد</button>
+            <div class="image-inputs">
+                <h3>إضافة صور اللاعبين</h3>
+                <input type="text" id="player1-name" placeholder="اسم اللاعب الأول" value="محمد صلاح">
+                <input type="file" id="player1-image" accept="image/*" aria-label="تحميل صورة اللاعب الأول">
+                <input type="text" id="player2-name" placeholder="اسم اللاعب الثاني" value="ميسي">
+                <input type="file" id="player2-image" accept="image/*" aria-label="تحميل صورة اللاعب الثاني">
+            </div>
+            <div class="background-input">
+                <h3>إضافة صورة كخلفية</h3>
+                <input type="file" id="background-image" accept="image/*" aria-label="تحميل صورة الخلفية">
+            </div>
+            <button id="prepare-button">تحضير النتائج</button>
+        </div>
+
+        <div class="output-section">
+            <h2>مقارنة بواسطة الذكاء الإصطناعي</h2>
+            <div id="result-display">
+                <!-- هنا سيتم عرض نتائج المقارنة -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // تفعيل السحب والإفلات على الصفوف
+        let draggedRow = null;
+
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.setAttribute('draggable', 'true');
+            row.addEventListener('dragstart', () => {
+                draggedRow = row;
+                row.classList.add('dragging');
+            });
+
+            row.addEventListener('dragend', () => {
+                draggedRow = null;
+                row.classList.remove('dragging');
+            });
+
+            row.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                if (row !== draggedRow) {
+                    const bounding = row.getBoundingClientRect();
+                    const offset = bounding.y + bounding.height / 2;
+                    if (e.clientY - offset > 0) {
+                        row.style.borderBottom = '2px solid #000';
+                        row.style.borderTop = '';
+                    } else {
+                        row.style.borderTop = '2px solid #000';
+                        row.style.borderBottom = '';
+                    }
+                }
+            });
+
+            row.addEventListener('dragleave', () => {
+                row.style.borderTop = '';
+                row.style.borderBottom = '';
+            });
+
+            row.addEventListener('drop', () => {
+                if (row !== draggedRow) {
+                    row.style.borderTop = '';
+                    row.style.borderBottom = '';
+                    if (draggedRow) {
+                        const tbody = row.parentNode;
+                        tbody.insertBefore(draggedRow, row.nextSibling);
+                    }
+                }
+            });
+        });
+
+        // إضافة صف جديد عند الضغط على زر إضافة
+        document.getElementById('add-item-button').onclick = function() {
+            const tbody = document.querySelector('tbody');
+            const newRow = document.createElement('tr');
+            newRow.setAttribute('draggable', 'true');
+            newRow.innerHTML = `
+                <td><input type="text" placeholder="اسم البند"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الأول (مثال: 80%)"></td>
+                <td><input type="text" placeholder="نسبة اللاعب الثاني (مثال: 65%)"></td>
+                <td class="handle">⇅</td>
+                <td><button class="delete-button">X</button></td>
+            `;
+
+            // إضافة الحدث لزر الحذف
+            newRow.querySelector('.delete-button').onclick = function() {
+                newRow.remove(); // إزالة الصف عند النقر على زر الحذف
+            };
+
+            tbody.appendChild(newRow); // إضافة الصف الجديد إلى tbody
+
+            // تفعيل السحب والإفلات على الصف الجديد
+            newRow.addEventListener('dragstart', () => {
+                draggedRow = newRow;
+                newRow.classList.add('dragging');
+            });
+
+            newRow.addEventListener('dragend', () => {
+                draggedRow = null;
+                newRow.classList.remove('dragging');
+            });
+
+            newRow.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                if (newRow !== draggedRow) {
+                    const bounding = newRow.getBoundingClientRect();
+                    const offset = bounding.y + bounding.height / 2;
+                    if (e.clientY - offset > 0) {
+                        newRow.style.borderBottom = '2px solid #000';
+                        newRow.style.borderTop = '';
+                    } else {
+                        newRow.style.borderTop = '2px solid #000';
+                        newRow.style.borderBottom = '';
+                    }
+                }
+            });
+
+            newRow.addEventListener('dragleave', () => {
+                newRow.style.borderTop = '';
+                newRow.style.borderBottom = '';
+            });
+
+            newRow.addEventListener('drop', () => {
+                if (newRow !== draggedRow) {
+                    newRow.style.borderTop = '';
+                    newRow.style.borderBottom = '';
+                    if (draggedRow) {
+                        const tbody = newRow.parentNode;
+                        tbody.insertBefore(draggedRow, newRow.nextSibling);
+                    }
+                }
+            });
+        };
+
+        // تفعيل الحذف للصفوف الحالية
+        document.querySelectorAll('.delete-button').forEach(button => {
+            button.onclick = function() {
+                button.closest('tr').remove(); // إزالة الصف عند النقر على زر الحذف
+            };
+        });
+    </script>
+</body>
+</html>
