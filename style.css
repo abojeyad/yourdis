@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #ffffff; /* خلفية بيضاء */
     margin: 0;
-    padding: 20px;
+    padding: 0px;
     color: #333;
 }
 
@@ -11,7 +11,7 @@ h2 {
     text-align: center;
     color: #4a4a4a;
     font-size: 16px; 
-	margin-left: 25px; /* هامش من اليسار */
+    margin-left: 25px; /* هامش من اليسار */
     margin-right: 25px; 
 }
 
@@ -69,8 +69,7 @@ button:hover {
     overflow-y: auto; /* تفعيل التمرير */
 }
 
-
-
+/* إعدادات القسم الأيمن */
 .right-section {
     padding: 20px;
     overflow-y: auto; /* تفعيل التمرير */
@@ -78,10 +77,10 @@ button:hover {
     background-size: cover;
     background-position: center;
     color: #fff; /* لتظهر النصوص بشكل واضح فوق الخلفية */
-
+    
     /* إضافة طبقة شفافة فوق الصورة الخلفية */
     background-color: rgba(255, 255, 255, 0.9); /* لون أبيض مع 70% شفافية */
-
+    
     /* مزج الألوان */
     background-blend-mode: lighten; /* دمج الألوان لتقليل وضوح الصورة */
 
@@ -91,14 +90,15 @@ button:hover {
     align-items: center; /* توسيط العناصر أفقيًا */
     text-align: center; /* توسيط النصوص */
     padding-top: 20px; /* مساحة إضافية من الأعلى */
-
-    /* إضافة هوامش */
-    margin-left: 10%; /* هوامش من اليسار */
-    margin-right: 10%; /* هوامش من اليمين */
 }
 
-
-
+/* إضافة الهوامش للقسم الأيمن فقط في الشاشات الكبيرة */
+@media (min-width: 769px) {
+    .right-section {
+        margin-left: 10%; /* هوامش من اليسار */
+        margin-right: 10%; /* هوامش من اليمين */
+    }
+}
 
 /* تنسيق الأقسام الداخلية */
 .input-section, .output-section {
@@ -242,7 +242,6 @@ button:hover {
     color: black; /* تغيير اللون إلى الأسود */
 }
 
-
 .player-total.show {
     transform: scale(1);
     opacity: 1;
@@ -258,8 +257,6 @@ button:hover {
     height: auto;
     animation: spin 1s linear infinite;
 }
-
-
 
 /* لجعل الموقع متجاوبًا مع الأجهزة المحمولة */
 @media (max-width: 768px) {
@@ -316,6 +313,6 @@ button:hover {
 @media (max-width: 768px) {
     .right-section {
         min-height: 100; /* إزالة الارتفاع الثابت حتى يأخذ المساحة المتاحة له فقط */
-        margin-top: 10px; /* إضافة مسافة بين القسمين على الأجهزة المحمولة */
+        margin-top: 0px; /* إضافة مسافة بين القسمين على الأجهزة المحمولة */
     }
 }
