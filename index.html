@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>تطبيق مقارنة اللاعبين</title>
+    <meta name="description" content="تطبيق يسمح بمقارنة أداء اللاعبين من خلال إدخال بياناتهم وتحليل النتائج.">
+</head>
+<body>
+    <div class="container">
+        <!-- القسم الأيسر لإدخال البيانات -->
+        <div class="left-section input-section">
+            <h2>إدخال البيانات</h2>
+            <h3>رفع ملف CSV</h3>
+            <input type="file" id="csv-file" accept=".csv">
+            <button id="upload-button">رفع ملف CSV</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>البند</th>
+                        <th>اللاعب الأول</th>
+                        <th>اللاعب الثاني</th>
+                        <th>تحريك</th>
+                        <th>حذف</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد المباريات"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="86%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="77%"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأهداف"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="80"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="95"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+                    <tr draggable="true">
+                        <td><input type="text" placeholder="اسم البند" value="عدد الأسيست"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="65%"></td>
+                        <td><input type="text" placeholder="مثال: 80% أو 80" value="83%"></td>
+                        <td class="handle">⇅</td>
+                        <td><button class="delete-button">X</button></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <button id="add-item-button">إضافة بند جديد</button>
+            <div class="image-inputs">
+                <h3>إضافة صور اللاعبين</h3>
+                <input type="text" id="player1-name" placeholder="اسم اللاعب الأول">
+                <input type="file" id="player1-image" accept="image/*" aria-label="تحميل صورة اللاعب الأول">
+                <input type="text" id="player2-name" placeholder="اسم اللاعب الثاني">
+                <input type="file" id="player2-image" accept="image/*" aria-label="تحميل صورة اللاعب الثاني">
+            </div>
+            <div class="background-input">
+                <h3>إضافة صورة كخلفية</h3>
+                <input type="file" id="background-image" accept="image/*" aria-label="تحميل صورة الخلفية">
+            </div>
+            <button id="prepare-button">تحضير النتائج</button>
+        </div>
+
+        <!-- القسم الأيمن لعرض النتائج مع الخلفية -->
+        <div class="right-section output-section">
+            <h2>مقارنة بواسطة الذكاء الإصطناعي</h2>
+            <div id="result-display">
+                <!-- هنا سيتم عرض نتائج المقارنة -->
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script> <!-- تأكد من أن هذا هو اسم ملف JavaScript الخاص بك -->
+</body>
+</html>
