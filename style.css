@@ -66,22 +66,21 @@ button:hover {
     overflow-y: auto; /* تفعيل التمرير */
 }
 
-/* القسم الأيمن */
+
+
 .right-section {
-    width: 50%;
     padding: 20px;
     overflow-y: auto; /* تفعيل التمرير */
     background-image: url('path/to/your/image.jpg'); /* ضع مسار الصورة هنا */
     background-size: cover;
     background-position: center;
     color: #fff; /* لتظهر النصوص بشكل واضح فوق الخلفية */
-}
-.right-section {
-    /* خصائص الخلفية */
-    background-image: url('path/to/your/image.jpg'); /* ضع مسار الصورة هنا */
-    background-size: cover;
-    background-position: center;
-    color: #fff;
+
+    /* إضافة طبقة شفافة فوق الصورة الخلفية */
+    background-color: rgba(255, 255, 255, 0.9); /* لون أبيض مع 70% شفافية */
+
+    /* مزج الألوان */
+    background-blend-mode: lighten; /* دمج الألوان لتقليل وضوح الصورة */
 
     /* توسيط العناصر أفقيًا وإبقائها في أعلى القسم */
     display: flex;
@@ -89,7 +88,13 @@ button:hover {
     align-items: center; /* توسيط العناصر أفقيًا */
     text-align: center; /* توسيط النصوص */
     padding-top: 20px; /* مساحة إضافية من الأعلى */
+
+    /* إضافة هوامش */
+    margin-left: 10%; /* هوامش من اليسار */
+    margin-right: 10%; /* هوامش من اليمين */
 }
+
+
 
 
 /* تنسيق الأقسام الداخلية */
