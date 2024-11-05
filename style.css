@@ -258,3 +258,64 @@ button:hover {
     height: auto;
     animation: spin 1s linear infinite;
 }
+
+
+
+/* لجعل الموقع متجاوبًا مع الأجهزة المحمولة */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column; /* عرض الأقسام كأعمدة بدلاً من صفوف */
+        height: auto; /* تعيين ارتفاع تلقائي */
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%; /* كل قسم يحتل العرض الكامل */
+        margin: 0; /* إزالة الهوامش */
+        padding: 10px; /* تقليل التباعد الداخلي */
+    }
+
+    /* جعل كل قسم يأخذ المساحة التي يحتاجها فقط */
+    .left-section {
+        margin-bottom: 20px; /* إضافة مسافة بين القسمين */
+    }
+
+    .right-section {
+        margin-top: 20px; /* إضافة مسافة بين القسمين */
+        padding-bottom: 40px; /* زيادة المساحة من الأسفل */
+        min-height: 50vh; /* تعيين حد أدنى للارتفاع للقسم السفلي */
+    }
+
+    /* التحكم في حجم الصور */
+    .names-container img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .progress-container {
+        max-width: 100%; /* السماح للشريط بالتكيف مع العرض المتاح */
+    }
+
+    .player-total {
+        font-size: 20px; /* تقليل حجم النص */
+    }
+
+    button {
+        padding: 10px; /* تقليل حجم الأزرار */
+        font-size: 14px;
+    }
+}
+
+/* اجعل القسم الأيمن يأخذ المساحة المتاحة */
+.right-section {
+    flex: 1; /* اجعل القسم يأخذ المساحة المتاحة */
+    min-height: 100vh; /* تعيين حد أدنى للارتفاع كنسبة من ارتفاع الشاشة */
+}
+
+/* إزالة ارتفاع ثابت للقسم الأيمن على الأجهزة المحمولة */
+@media (max-width: 768px) {
+    .right-section {
+        min-height: 100; /* إزالة الارتفاع الثابت حتى يأخذ المساحة المتاحة له فقط */
+        margin-top: 10px; /* إضافة مسافة بين القسمين على الأجهزة المحمولة */
+    }
+}
