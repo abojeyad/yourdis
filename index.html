@@ -63,12 +63,15 @@
                 <h3>إضافة صورة كخلفية</h3>
                 <input type="file" id="background-image" accept="image/*" aria-label="تحميل صورة الخلفية">
             </div>
+			<div class="left-section input-section">
             <button id="prepare-button">تحضير النتائج</button>
+			<button id="compare-left-button">بدء المقارنة</button>
+			</div>
         </div>
 
         <!-- القسم الأيمن لعرض النتائج مع الخلفية -->
         <div class="right-section output-section">
-            <h2>مقارنة بواسطة الذكاء الإصطناعي</h2>
+		<h2 id="animated-heading">مقارنة بواسطة الذكاء الإصطناعي</h2>
             <div id="result-display">
                 <!-- هنا سيتم عرض نتائج المقارنة -->
             </div>

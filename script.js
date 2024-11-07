@@ -151,6 +151,8 @@ function displayPlayerTotal(elementId, total) {
         element.classList.add('show');
     }, 10);
 }
+document.getElementById('compare-left-button').onclick = startComparison;
+
 
 // دالة لتوليد لون عشوائي
 function getRandomColor() {

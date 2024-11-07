@@ -320,3 +320,44 @@ button:hover {
         margin-top: 0px; /* إضافة مسافة بين القسمين على الأجهزة المحمولة */
     }
 }
+
+
+
+
+#animated-heading {
+    font-size: 22px; /* حجم الخط */
+    font-weight: bold;
+    color: #333; /* لون النص الأساسي */
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص */
+	margin-top: 40px
+}
+
+#animated-heading::before, #player1-total::before, #player2-total::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+    animation: lightEffect 1s linear infinite;
+}
+
+@keyframes lightEffect {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
+
+
+#compare-left-button {
+    margin-top: 10px; 
+	
+}
