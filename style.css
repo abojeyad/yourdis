@@ -257,6 +257,10 @@ button:hover {
     height: auto;
     animation: spin 1s linear infinite;
 }
+.right-section::-webkit-scrollbar {
+    display: none;
+}
+
 
 /* لجعل الموقع متجاوبًا مع الأجهزة المحمولة */
 @media (max-width: 768px) {
