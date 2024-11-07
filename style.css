@@ -79,7 +79,7 @@ button:hover {
     color: #fff; /* لتظهر النصوص بشكل واضح فوق الخلفية */
     
     /* إضافة طبقة شفافة فوق الصورة الخلفية */
-    background-color: rgba(255, 255, 255, 0.9); /* لون أبيض مع 70% شفافية */
+    background-color: rgba(255, 255, 255, 0.83); /* لون أبيض مع 70% شفافية */
     
     /* مزج الألوان */
     background-blend-mode: lighten; /* دمج الألوان لتقليل وضوح الصورة */
@@ -155,7 +155,7 @@ button:hover {
 }
 
 .progress-label {
-    font-size: 12px;
+    font-size: 14px;
     color: #4a4a4a;
     font-weight: bold;
 }
@@ -321,43 +321,36 @@ button:hover {
     }
 }
 
-
-
-
 #animated-heading {
-    font-size: 22px; /* حجم الخط */
+    font-size: 16px;
     font-weight: bold;
-    color: #333; /* لون النص الأساسي */
-    position: relative;
-    display: inline-block;
+    color: #987;
+    position: fixed; /* تثبيت العنصر */
+    top: 20px; /* المسافة من أعلى الصفحة */
     overflow: hidden;
-    white-space: nowrap;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* إضافة ظل للنص */
-	margin-top: 40px
-}
-
-#animated-heading::before, #player1-total::before, #player2-total::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-    animation: lightEffect 1s linear infinite;
-}
-
-@keyframes lightEffect {
-    0% {
-        left: 100%;
-    }
-    100% {
-        left: -100%;
-    }
+    display: inline-block;
+    z-index: 1000; /* ضمان بقاء العنصر فوق باقي العناصر */
 }
 
 
-#compare-left-button {
-    margin-top: 10px; 
-	
-}
+        /* تأثير الإضاءة */
+        #animated-heading::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: lightEffect 2s linear infinite;
+        }
+
+        /* إعداد الحركة */
+        @keyframes lightEffect {
+            0% {
+                left: 100%;
+            }
+            100% {
+                left: -100%;
+            }
+        }
