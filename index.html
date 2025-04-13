@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>landing-page</title>
-  <!-- Font Awesome for icons -->
+  <!-- تحسين عنوان الصفحة -->
+  <title>يوردس – منصتك لاكتشاف أفضل العروض</title>
+  <!-- إضافة وصف مخصص لمحركات البحث -->
+  <meta name="description" content="يوردس - منصتك لاكتشاف أفضل العروض الحقيقية من المتاجر الإلكترونية والمحلية. استمتع بتجربة تسوق سهلة ومميزة دون عناء البحث.">
+  <!-- Font Awesome للأيقونات -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     /* Base Styles */
@@ -13,57 +16,15 @@
       padding: 0;
       box-sizing: border-box;
     }
-
-    @keyframes gradient-shift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
-    }
-
-    @keyframes pulse-glow {
-      0% {
-        opacity: 0.3;
-      }
-      50% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 0.3;
-      }
-    }
-
-    @keyframes floating-particles {
-      0% {
-        transform: translateY(0) translateX(0);
-      }
-      25% {
-        transform: translateY(-5px) translateX(5px);
-      }
-      50% {
-        transform: translateY(0) translateX(10px);
-      }
-      75% {
-        transform: translateY(5px) translateX(5px);
-      }
-      100% {
-        transform: translateY(0) translateX(0);
-      }
-    }
-
+    
     body {
       font-family: 'Arial', 'Tahoma', sans-serif;
-      color: #333; /* تغيير لون النص للخلفية الفاتحة */
+      color: #333;
       min-height: 100vh;
       text-align: center;
       position: relative;
       overflow-x: hidden;
-      background: #f9f9f9; /* لون فاتح للخلفية */
+      background: #f9f9f9;
     }
 
     /* خلفية فاتحة متعددة الطبقات */
@@ -90,7 +51,6 @@
         rgba(255, 222, 173, 0.85) 70%,
         rgba(255, 213, 145, 0.8) 100%);
       background-size: 400% 400%;
-      animation: gradient-shift 15s ease infinite;
       z-index: -9;
     }
 
@@ -108,7 +68,6 @@
         rgba(255, 218, 185, 0.2) 100%);
       z-index: -8;
       transform: scale(1.5);
-      animation: pulse-glow 8s ease-in-out infinite;
     }
 
     /* طبقة شبكية خفيفة بلون برتقالي فاتح */
@@ -143,7 +102,6 @@
       border-radius: 50%;
       background: rgba(241, 143, 1, 0.2);
       box-shadow: 0 0 10px 2px rgba(241, 143, 1, 0.1);
-      animation: floating-particles 15s ease-in-out infinite;
     }
 
     .particle:nth-child(1) {
@@ -151,8 +109,6 @@
       left: 10%;
       width: 8px;
       height: 8px;
-      animation-delay: 0s;
-      animation-duration: 20s;
       background: rgba(241, 143, 1, 0.25);
     }
 
@@ -161,16 +117,12 @@
       left: 30%;
       width: 5px;
       height: 5px;
-      animation-delay: 2s;
-      animation-duration: 18s;
       background: rgba(255, 165, 0, 0.2);
     }
 
     .particle:nth-child(3) {
       top: 65%;
       left: 70%;
-      animation-delay: 5s;
-      animation-duration: 22s;
       background: rgba(255, 127, 80, 0.15);
     }
 
@@ -179,8 +131,6 @@
       left: 20%;
       width: 7px;
       height: 7px;
-      animation-delay: 1s;
-      animation-duration: 25s;
       background: rgba(107, 15, 26, 0.15);
     }
 
@@ -189,16 +139,12 @@
       left: 85%;
       width: 6px;
       height: 6px;
-      animation-delay: 3s;
-      animation-duration: 19s;
       background: rgba(205, 92, 92, 0.2);
     }
 
     .particle:nth-child(6) {
       top: 90%;
       left: 40%;
-      animation-delay: 7s;
-      animation-duration: 24s;
       background: rgba(233, 150, 122, 0.15);
     }
 
@@ -207,8 +153,6 @@
       left: 50%;
       width: 9px;
       height: 9px;
-      animation-delay: 4s;
-      animation-duration: 21s;
       background: rgba(210, 105, 30, 0.2);
     }
 
@@ -232,7 +176,7 @@
     }
 
     .logo {
-      height: 200px;
+      height: 100px;
       width: auto;
       filter: drop-shadow(0 0 15px rgba(241, 143, 1, 0.3));
       transition: all 0.5s ease;
@@ -258,7 +202,7 @@
       font-size: 2.2em;
       line-height: 1.5;
       max-width: 90%;
-      color: #6b0f1a; /* لون عودي داكن للعناوين */
+      color: #6b0f1a;
       text-shadow: 0 2px 5px rgba(107, 15, 26, 0.1);
       letter-spacing: 1px;
     }
@@ -266,7 +210,7 @@
     p {
       margin: 20px 0;
       font-size: 1.3em;
-      color: #6b0f1a; /* لون عودي داكن للنص */
+      color: #6b0f1a;
       font-weight: 500;
     }
 
@@ -418,7 +362,7 @@
 
   <div class="container">
     <header>
-      <img src="logo.png" alt="شعار التطبيق" class="logo">
+      <img src="logo.svg" alt="شعار يوردس" class="logo">
     </header>
 
     <main>
@@ -431,7 +375,7 @@
       <p>حمل التطبيق وشوف</p>
 
       <div class="download-buttons">
-        <!-- أندرويد - تم تغيير مصدر الصورة -->
+        <!-- أندرويد -->
         <a href="https://play.google.com/store/apps/details?id=com.yourdis&pli=1" 
            target="_blank" 
            rel="noopener noreferrer" class="download-btn">
@@ -439,7 +383,7 @@
                alt="تحميل من Google Play">
         </a>
 
-        <!-- آيفون - تم تغيير مصدر الصورة -->
+        <!-- آيفون -->
         <a href="https://apps.apple.com/sa/app/yourdis/id6584529767"
            target="_blank" 
            rel="noopener noreferrer" class="download-btn">
@@ -468,9 +412,8 @@
   </div>
 
   <script>
-    // تأثيرات تفاعلية محسنة
+    // تأثير التفاعل على الشعار فقط
     document.addEventListener('DOMContentLoaded', function() {
-      // تأثير الشعار مع توهج لطيف
       const logo = document.querySelector('.logo');
       if (logo) {
         logo.addEventListener('mouseover', function() {
@@ -483,19 +426,8 @@
           this.style.filter = 'drop-shadow(0 0 15px rgba(241, 143, 1, 0.3))';
         });
       }
-      
-      // تأثير السكرول السلس
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          e.preventDefault();
-          
-          document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-          });
-        });
-      });
-      
-      // إنشاء جزيئات ديناميكية إضافية
+
+      // إنشاء جزيئات إضافية بدون حركة ديناميكية
       const particlesContainer = document.querySelector('.bg-particles');
       for (let i = 0; i < 10; i++) {
         const particle = document.createElement('div');
@@ -504,10 +436,6 @@
         particle.style.left = Math.random() * 100 + '%';
         particle.style.width = Math.random() * 5 + 3 + 'px';
         particle.style.height = particle.style.width;
-        particle.style.animationDelay = Math.random() * 10 + 's';
-        particle.style.animationDuration = Math.random() * 10 + 15 + 's';
-        
-        // تنويع ألوان الجزيئات بألوان فاتحة
         const colors = [
           'rgba(241, 143, 1, 0.2)', 
           'rgba(255, 165, 0, 0.2)', 
@@ -515,7 +443,6 @@
           'rgba(210, 105, 30, 0.15)'
         ];
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        
         particlesContainer.appendChild(particle);
       }
     });
