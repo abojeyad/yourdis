@@ -25,8 +25,8 @@
 
     /* شعار التطبيق */
     .logo {
-      width: 120px;
-      max-width: 25vw;
+      width: 25vw;       /* الحجم النسبي مع الشاشة */
+      height: auto;      /* الحفاظ على النسبة */
       margin-bottom: 1.5rem;
     }
 
@@ -96,7 +96,7 @@
   <div class="circle" id="countdown">3</div>
 
   <!-- العبارة الإنجليزية تحت الدائرة -->
-  <p class="message-en">Hold on, redirecting you to the store to discover amazing deals 🎉</p>
+  <p class="message-en">Hold on, redirecting you to the store to discover amazing offers 🎉</p>
 
   <!-- أيقونات التحميل الرسمية -->
   <div class="store-icons">
@@ -128,7 +128,7 @@
         countdownEl.textContent = seconds;
         if (seconds <= 0) {
           clearInterval(interval);
-          location.replace(target);
+          window.location.href = target; // فتح المتجر مباشرة
         }
       }, 1000);
     })();
