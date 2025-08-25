@@ -3,78 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- تحسين عنوان الصفحة -->
-  <title>يوردس – منصتك لاكتشاف أفضل العروض</title>
-  <!-- إضافة وصف مخصص لمحركات البحث -->
-  <meta name="description" content="يوردس - منصتك لاكتشاف أفضل العروض الحقيقية من المتاجر الإلكترونية والمحلية. استمتع بتجربة تسوق سهلة ومميزة دون عناء البحث.">
-  <!-- ربط ملف CSS الخارجي -->
-  <link rel="stylesheet" href="styles.css">
-  <!-- Font Awesome للأيقونات -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>تحميل تطبيق Yourdis</title>
+  
+  <!-- استدعاء خط Cairo من Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Cairo', sans-serif;
+      background: #FFF5E0;
+      color: #333;
+      text-align: center;
+    }
+
+    /* شعار التطبيق */
+    .logo {
+      width: 120px;
+      max-width: 25vw;
+      margin-bottom: 1.5rem;
+    }
+
+    /* العبارة العربية فوق الدائرة */
+    .message-ar {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    /* الدائرة */
+    .circle {
+      width: 25vw;
+      height: 25vw;
+      max-width: 150px;
+      max-height: 150px;
+      min-width: 80px;
+      min-height: 80px;
+      border-radius: 50%;
+      border: 6px solid #FF9F1C;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #FF6B00;
+      margin-bottom: 1.5rem;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { transform: scale(1); }
+      to { transform: scale(1.1); }
+    }
+
+    /* العبارة الإنجليزية تحت الدائرة */
+    .message-en {
+      font-size: 1.2rem;
+      font-weight: normal;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    /* أيقونات التحميل الرسمية */
+    .store-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 0.5rem;
+    }
+    .store-icons a img {
+      width: 140px;
+      max-width: 40vw;
+      height: auto;
+    }
+
+  </style>
 </head>
 <body>
-  <!-- طبقات الخلفية المتطورة بألوان فاتحة -->
-  <div class="background-container">
-    <div class="bg-layer-1"></div>
-    <div class="bg-layer-2"></div>
-    <div class="bg-layer-3"></div>
-    <div class="bg-particles">
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-      <div class="particle"></div>
-    </div>
+
+  <!-- شعار التطبيق -->
+  <img src="logo.svg" alt="Yourdis Logo" class="logo">
+
+  <!-- العبارة العربية فوق الدائرة -->
+  <p class="message-ar">انتظر لحظة، جاري توجيهك للمتجر لإكتشاف أفضل العروض 🎉</p>
+
+  <!-- الدائرة للعد التنازلي -->
+  <div class="circle" id="countdown">3</div>
+
+  <!-- العبارة الإنجليزية تحت الدائرة -->
+<p class="message-en">Hold on, redirecting you to the store to discover amazing offers 🎉</p>
+
+  <!-- أيقونات التحميل الرسمية -->
+  <div class="store-icons">
+    <a href="https://apps.apple.com/sa/app/yourdis/id6584529767">
+      <img src="download app store.svg" alt="Download on App Store">
+    </a>
+    <a href="https://play.google.com/store/apps/details?id=com.yourdis">
+      <img src="download google play.svg" alt="Download on Google Play">
+    </a>
   </div>
 
-  <div class="container">
-    <header>
-      <img src="logo.svg" alt="شعار يوردس" class="logo">
-    </header>
+  <script>
+    (() => {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      let target = "https://yourdis.com";
 
-    <main>
-      <h1>
-        تطبيق يوردس <br>
-         أكبر تطبيق عروض في المملكة<br>
-        يجيب لك العروض من كل المتاجر
-      </h1>
+      if (/android/i.test(ua)) {
+        target = "https://play.google.com/store/apps/details?id=com.yourdis";
+      } else if (/iPad|iPhone|iPod/.test(navigator.platform) && !window.MSStream) {
+        target = "https://apps.apple.com/sa/app/yourdis/id6584529767";
+      }
 
-      <p>حمل التطبيق وشوف</p>
+      // عداد تنازلي داخل الدائرة
+      let seconds = 3;
+      const countdownEl = document.getElementById('countdown');
 
-      <div class="download-buttons">
-        <!-- أندرويد -->
-        <a href="https://play.google.com/store/apps/details?id=com.yourdis&pli=1" target="_blank" rel="noopener noreferrer" class="download-btn">
-          <img src="download google play.svg" alt="تحميل من Google Play">
-        </a>
+      const interval = setInterval(() => {
+        seconds--;
+        countdownEl.textContent = seconds;
+        if (seconds <= 0) {
+          clearInterval(interval);
+          location.replace(target);
+        }
+      }, 1000);
+    })();
+  </script>
 
-        <!-- آيفون -->
-        <a href="https://apps.apple.com/sa/app/yourdis/id6584529767" target="_blank" rel="noopener noreferrer" class="download-btn">
-          <img src="download app store.svg" alt="تحميل من App Store">
-        </a>
-      </div>
-    </main>
-
-    <footer>
-      <div class="social-icons">
-        <a href="https://www.instagram.com/Yourdiscom/" target="_blank" rel="noopener noreferrer" class="social-icon">
-          <i class="fab fa-instagram"></i>
-        </a>
-        <a href="https://www.facebook.com/Yourdiscom/" target="_blank" rel="noopener noreferrer" class="social-icon">
-          <i class="fab fa-facebook-f"></i>
-        </a>
-        <a href="https://www.tiktok.com/@yourdiscom" target="_blank" rel="noopener noreferrer" class="social-icon">
-          <i class="fab fa-tiktok"></i>
-        </a>
-        <a href="https://x.com/Yourdiscom/" target="_blank" rel="noopener noreferrer" class="social-icon">
-          <i class="fab fa-twitter"></i>
-        </a>
-      </div>
-    </footer>
-  </div>
-
-  <!-- ربط ملف JavaScript الخارجي -->
-  <script src="scripts.js"></script>
 </body>
 </html>
